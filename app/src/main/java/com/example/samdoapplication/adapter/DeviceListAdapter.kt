@@ -12,10 +12,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.samdoapplication.R
+import com.example.samdoapplication.model.DeviceData
 import com.example.samdoapplication.model.DeviceModel
 
 
-class DeviceListAdapter(val mContext:Context, val deviceList: List<DeviceModel>, private val clickListener: (DeviceModel) -> Unit) :
+class DeviceListAdapter(val mContext:Context, val deviceList: List<DeviceData>, private val clickListener: (DeviceData) -> Unit) :
     RecyclerView.Adapter<DeviceListAdapter.ViewHolder>() {
 
     interface ItemClick{ //인터페이스
@@ -61,7 +62,7 @@ class DeviceListAdapter(val mContext:Context, val deviceList: List<DeviceModel>,
         val protocol = itemView?.findViewById<TextView>(R.id.protocol)
         @SuppressLint("UseSwitchCompatOrMaterialCode", "SetTextI18n")
 
-        fun bind(mContext: Context, device: DeviceModel, clickListener: (DeviceModel) -> Unit) {
+        fun bind(mContext: Context, device: DeviceData, clickListener: (DeviceData) -> Unit) {
 
             if (plasma != null) {
                 if (device != null) {
@@ -70,12 +71,12 @@ class DeviceListAdapter(val mContext:Context, val deviceList: List<DeviceModel>,
             }
             if (port != null) {
                 if (device != null) {
-                    port.text = device.port
+                    port.text = device.port.toString()
                 }
             }
             if (protocol != null) {
                 if (device != null) {
-                    protocol.text = device.protocol
+                    protocol.text = device.id
                 }
             }
            itemView.setOnClickListener {
