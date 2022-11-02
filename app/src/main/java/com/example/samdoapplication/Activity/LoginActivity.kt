@@ -1,4 +1,4 @@
-package com.example.samdoapplication
+package com.example.samdoapplication.Activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.samdoapplication.App
+import com.example.samdoapplication.LoadingDialog
+import com.example.samdoapplication.R
 import com.example.samdoapplication.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -15,7 +18,7 @@ class LoginActivity : AppCompatActivity() {
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_login)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 //
 //        configuration.locale = Locale.US
 //
@@ -23,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (App.prefs.myId != "") {
             Toast.makeText(this, App.prefs.myId+" 님 로그인", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
         } else {
 
@@ -52,8 +55,8 @@ class LoginActivity : AppCompatActivity() {
 //                                if(body?.LSIND_REGIST_NO == "fail"){
 //                                    toast(getString(R.string.user_nomatching))
 //                                }else{
-//                                    App.prefs.myId = inputLogin
-                                    val intent = Intent(this@LoginActivity,MainActivity::class.java)
+                                    App.prefs.myId = inputLogin
+                                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
 //                                    intent.putExtra("data",body)
                                     startActivity(intent)
 //                                    overridePendingTransition(R.anim.r_slicd_in,R.anim.r_slid_out)
