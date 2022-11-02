@@ -48,7 +48,7 @@ class SensorFragment : Fragment() {
             when(fromSub.resultCode){
                 0 -> { //성공
                     Toast.makeText(requireContext(), "등록 성공", Toast.LENGTH_SHORT).show()
-                    getDevice()
+                    getSensor()
                 }
                 1 -> { //실패 - 데이터 오류
                     Toast.makeText(requireContext(), "등록 실패", Toast.LENGTH_SHORT).show()
