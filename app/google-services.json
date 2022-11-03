@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "719925369170",
+    "project_id": "samdo-232b5",
+    "storage_bucket": "samdo-232b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719925369170:android:e5d7638f9885266810428b",
+        "android_client_info": {
+          "package_name": "com.smarthive.samdoapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719925369170-msnfp0ua0j3ou5huj8v8eu7h1sqfj0d8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smarthive.samdoapplication",
+            "certificate_hash": "6d256f703272614fc958ac8de739d18dc7ac2099"
+          }
+        },
+        {
+          "client_id": "719925369170-0f3spnrodlb3oun2stgjrc86jcg2heot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEioUO75mMsYtUAVnAYWL-QAjh91QYp7Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719925369170-0f3spnrodlb3oun2stgjrc86jcg2heot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
