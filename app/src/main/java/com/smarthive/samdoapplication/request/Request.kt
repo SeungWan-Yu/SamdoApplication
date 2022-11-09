@@ -62,8 +62,10 @@ class RegistFarmRequest(
     val REMARK : String
 )
 
-class FarmListRequest(
-    val USER_ID : String
+class ControlSensor(
+    val SENSOR_ID : String,
+    val TYPE : String,
+    val DATA : Int
 )
 
 class FarmRemoveRequest(

@@ -39,6 +39,11 @@ interface RetrofitInterface {
         @Body request: RegistSensorRequest
     ):Call<Sensorrespon>
 
+    @POST("/api/sensor/controle")
+    fun controlesensor(
+        @Body request: ControlSensor
+    ):Call<Sensorrespon>
+
 //    @POST("user/login")
 //    fun login(
 //        @Body request: LoginRequest

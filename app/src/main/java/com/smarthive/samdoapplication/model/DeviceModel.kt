@@ -77,5 +77,7 @@ class Sensorinfo(
     @SerializedName("TEMP") val TEMP : Float,
     @SerializedName("HUMI") val HUMI : Float,
     @SerializedName("VOCS") val VOCS : Int,
-    @SerializedName("O3") val O3 : Double
+    @SerializedName("O3") val O3 : Double,
+    @SerializedName("CTL_S2H") val CTL_H2S : Int,
+    @SerializedName("CTL_NH3") val CTL_NH3 : Int
 )

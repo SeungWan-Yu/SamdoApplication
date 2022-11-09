@@ -11,6 +11,7 @@ import com.smarthive.samdoapplication.LoadingDialog
 import com.smarthive.samdoapplication.R
 import com.smarthive.samdoapplication.databinding.ActivitySensorDetailBinding
 import com.smarthive.samdoapplication.model.Sensorrespon
+import com.smarthive.samdoapplication.request.ControlSensor
 import com.smarthive.samdoapplication.request.SensorRequest
 import kotlinx.coroutines.*
 import retrofit2.Call
@@ -42,6 +43,48 @@ class SensorDetailActivity : AppCompatActivity(){
         binding.srefreshLayout.setOnRefreshListener {
             getSensorState()
             binding.srefreshLayout.isRefreshing = false // 새로고침을 완료하면 아이콘을 없앤다.
+        }
+
+        binding.btnH2s.setOnClickListener {
+            val h2s = binding.ctlH2s.text.toString().toInt()
+
+            App.retrofitService.controlesensor(ControlSensor(sensorname,"H2S",h2s)).enqueue(object : Callback<Sensorrespon>{
+                override fun onResponse(
+                    call: Call<Sensorrespon>,
+                    response: Response<Sensorrespon>
+                ) {
+                    val body = response.body()
+                    if (body != null){
+                        if (body.result == "true"){
+                            Toast.makeText(applicationContext, "성공", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<Sensorrespon>, t: Throwable) {
+                    Toast.makeText(applicationContext, "통신 오류", Toast.LENGTH_SHORT).show()
+                }
+            })
+
+        }
+        binding.btnNh3.setOnClickListener {
+            val nh3 = binding.ctlNh3.text.toString().toInt()
+
+            App.retrofitService.controlesensor(ControlSensor(sensorname,"NH3",nh3)).enqueue(object : Callback<Sensorrespon>{
+                override fun onResponse(
+                    call: Call<Sensorrespon>,
+                    response: Response<Sensorrespon>
+                ) {
+                    val body = response.body()
+                    if (body != null){
+                        if (body.result == "true"){
+                            Toast.makeText(applicationContext, "성공", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<Sensorrespon>, t: Throwable) {
+                    Toast.makeText(applicationContext, "통신 오류", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
 //
 //        binding.btnAuto.setOnClickListener(this)
