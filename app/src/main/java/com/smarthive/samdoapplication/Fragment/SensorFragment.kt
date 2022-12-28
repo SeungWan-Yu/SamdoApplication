@@ -20,6 +20,7 @@ import com.smarthive.samdoapplication.adapter.SensorListAdapter
 import com.smarthive.samdoapplication.databinding.FragmentSensorBinding
 import com.smarthive.samdoapplication.model.SensorData
 import com.smarthive.samdoapplication.model.SensorModel
+import com.smarthive.samdoapplication.request.DeviceListRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -83,7 +84,7 @@ class SensorFragment : Fragment() {
         CoroutineScope(Dispatchers.Main).launch {
             val dialog = LoadingDialog(requireContext())
             dialog.show()
-            App.retrofitService.getsensorlist().enqueue(object : Callback<SensorModel> {
+            App.retrofitService.getsensorlist(DeviceListRequest(App.prefs.myId.toString())).enqueue(object : Callback<SensorModel> {
                 override fun onResponse(call: Call<SensorModel>, response: Response<SensorModel>) {
                     val body = response.body()
                     if (body != null) {
@@ -114,6 +115,7 @@ class SensorFragment : Fragment() {
         if (device != null) {
             nIntent.putExtra("sensorname", device.sensorname)
             nIntent.putExtra("port", device.port)
+            nIntent.putExtra("idx", device.idx)
         }
 //        nIntent.putExtra("SN", bee?.EQPMN_ESNTL_SN)
         startActivity(nIntent)

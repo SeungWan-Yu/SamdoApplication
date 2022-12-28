@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:weightSum="10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,9 +95,12 @@
 
         <Button
             android:id="@+id/signup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
             android:layout_weight="5"
+            android:background="#00FFFFFF"
             android:gravity="center"
             android:text="회원가입"
             android:textAllCaps="false"
@@ -113,7 +116,8 @@
             android:text="비밀번호 변경"
             android:textAllCaps="false"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <ImageView
@@ -123,12 +127,13 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="60dp"
+        android:background="@drawable/samdo_logo"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwview"/>
+        app:layout_constraintTop_toBottomOf="@+id/pwview" />
 
     <Button
         android:id="@+id/pwview"

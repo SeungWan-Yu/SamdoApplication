@@ -16,6 +16,7 @@
             android:layout_height="100dp">
 
             <!-- 커스텀 툴바 -->
+
             <include
                 android:id="@+id/main_tool_bar"
                 layout="@layout/main_tool_bar"

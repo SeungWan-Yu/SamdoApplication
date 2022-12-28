@@ -4,22 +4,9 @@ class Request(
 ) {
 }
 
-class JoinRequest(
-    val USER_ID: String,
-    val USER_NAM : String,
-    val USER_PASS : String,
-    val USER_EMAIL : String,
-    val USER_PHONE : String,
-    val USER_ADRESS : String,
-    val TOKEN : String
-){
-}
-
-class LoginRequest(
-    val USER_ID: String,
-    val USER_PASS : String
-){
-}
+class DeviceListRequest(
+    val USER_EMAIL : String
+)
 
 class DeviceRequest(
     val PLSM_ID : String
@@ -41,7 +28,7 @@ class DeviceModify(
 }
 
 class SensorRequest(
-    val SENSOR_ID : String
+    val SENSOR_IDX : String
 ){
 }
 

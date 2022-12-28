@@ -3,12 +3,13 @@ package com.smarthive.samdoapplication.model
 import com.google.gson.annotations.SerializedName
 
 class DeviceModel(
-    @SerializedName("result") val result : String,
+    @SerializedName("result") val result : Boolean,
     @SerializedName("data") val data : List<DeviceData>
 )
 
 class DeviceData(
     @SerializedName("PLSM_ID") val devicename : String,
+    @SerializedName("USER_EMAIL") val email : String,
     @SerializedName("PLSM_PORT") val port : Int,
     @SerializedName("PLSM_IP") val ip : String,
     @SerializedName("PRTC_ID") val id : String
@@ -54,13 +55,19 @@ class SensorModel(
 )
 
 class SensorData(
+    @SerializedName("IDX") val idx : Int,
     @SerializedName("SENSOR_ID") val sensorname : String,
+    @SerializedName("USER_EMAIL") val  email: String,
+    @SerializedName("ADDR") val addr : String,
     @SerializedName("GPS_LATITUDE") val latitude : String,
     @SerializedName("GPS_LONGITUDE") val longitude : String,
     @SerializedName("SENSOR_PORT") val port : String,
     @SerializedName("SENSOR_IP") val ip : String,
     @SerializedName("SENSOR_MEMORY") val memory : Int,
-    @SerializedName("PRTC_ID") val prtc : String
+    @SerializedName("PRTC_ID") val prtc : String,
+    @SerializedName("CTL_S2H") val s2h : Float,
+    @SerializedName("CTL_NH3") val nh3 : Float,
+    @SerializedName("CTL_PLSM") val plsm : Float,
 )
 
 class Sensorrespon(
@@ -76,8 +83,22 @@ class Sensorinfo(
     @SerializedName("CH2O") val CH2O :Int,
     @SerializedName("TEMP") val TEMP : Float,
     @SerializedName("HUMI") val HUMI : Float,
-    @SerializedName("VOCS") val VOCS : Int,
-    @SerializedName("O3") val O3 : Double,
-    @SerializedName("CTL_S2H") val CTL_H2S : Int,
-    @SerializedName("CTL_NH3") val CTL_NH3 : Int
+    @SerializedName("VOCS") val VOCS : Float,
+    @SerializedName("O3") val O3 : Float,
+    @SerializedName("CTL_S2H") val CTL_H2S : Float,
+    @SerializedName("CTL_NH3") val CTL_NH3 : Float
+)
+
+class MapPointModel(
+    @SerializedName("result") val result : Boolean,
+    @SerializedName("data") val data : List<MapPointData>
+)
+
+class MapPointData(
+    @SerializedName("SENSOR_IDX") val SENSOR_IDX : Int,
+    @SerializedName("MESURE_DT") val MESURE_DT : String,
+    @SerializedName("ADDR") val ADDR : String,
+    @SerializedName("GPS_LATITUDE") val GPS_LATITUDE : String,
+    @SerializedName("GPS_LONGITUDE") val GPS_LONGITUDE : String,
+    @SerializedName("ODOR") val ODOR : Int
 )

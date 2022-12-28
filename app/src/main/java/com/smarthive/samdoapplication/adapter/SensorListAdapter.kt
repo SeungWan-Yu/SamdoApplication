@@ -60,6 +60,7 @@ class SensorListAdapter(val mContext:Context, val sensorList: List<SensorData>, 
         val memory = itemView?.findViewById<TextView>(R.id.s_memory)
         val lati = itemView?.findViewById<TextView>(R.id.s_lati)
         val longi = itemView?.findViewById<TextView>(R.id.s_longi)
+        val addr = itemView?.findViewById<TextView>(R.id.s_addr)
         @SuppressLint("UseSwitchCompatOrMaterialCode", "SetTextI18n")
 
         fun bind(mContext: Context, sensor: SensorData, clickListener: (SensorData) -> Unit) {
@@ -92,6 +93,12 @@ class SensorListAdapter(val mContext:Context, val sensorList: List<SensorData>, 
             if (longi != null) {
                 if (sensor != null) {
                     longi.text = sensor.longitude
+                }
+            }
+
+            if (addr != null){
+                if (sensor != null) {
+                    addr.text = sensor.addr
                 }
             }
            itemView.setOnClickListener {

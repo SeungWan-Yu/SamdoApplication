@@ -4,26 +4,27 @@ import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.Signature
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.smarthive.samdoapplication.App
+import com.smarthive.samdoapplication.Fragment.MapFragment
 import com.smarthive.samdoapplication.Fragment.PlasmaFragment
 import com.smarthive.samdoapplication.Fragment.SensorFragment
 import com.smarthive.samdoapplication.R
 import com.smarthive.samdoapplication.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -33,15 +34,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var drawerLayout: DrawerLayout
     private val TAG_PLASMA_FRAGMENT = "plasma_fragment"
     private val TAG_SENSOR_FRAGMENT = "sensor_fragment"
+    private val TAG_STATE_FRAGMENT = "state_fragment"
+    private val TAG_MAP_FRAGMENT = "map_fragment"
     var mBackWait:Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-
-        // 해시키
-        getHashKey()
 
         // 네비게이션 메뉴를 초기화
         initNavigationMenu()
@@ -61,6 +60,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val plasma = manager.findFragmentByTag(TAG_PLASMA_FRAGMENT)
         val sensor = manager.findFragmentByTag(TAG_SENSOR_FRAGMENT)
+        val map = manager.findFragmentByTag(TAG_MAP_FRAGMENT)
 
         // Hide all Fragment
         if (plasma != null) {
@@ -68,6 +68,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         if (sensor != null) {
             ft.hide(sensor)
+        }
+        if (map != null) {
+            ft.hide(map)
         }
 
         // Show  current Fragment
@@ -79,6 +82,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (tag == TAG_SENSOR_FRAGMENT) {
             if (sensor != null) {
                 ft.show(sensor)
+            }
+        }
+        if (tag == TAG_MAP_FRAGMENT) {
+            if (map != null) {
+                ft.show(map)
             }
         }
 
@@ -131,15 +139,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean{
         when(item.itemId){
-            R.id.mapFragment -> {
+            R.id.plasmaFragment -> {
                 setFragment(TAG_PLASMA_FRAGMENT, PlasmaFragment())
                 drawerLayout.closeDrawer(GravityCompat.START)
                 setActionBarTitle("플라즈마")
             }
-            R.id.farmFragment -> {
+            R.id.sensorFragment -> {
                 setFragment(TAG_SENSOR_FRAGMENT, SensorFragment())
                 drawerLayout.closeDrawer(GravityCompat.START)
                 setActionBarTitle("센서")
+            }
+            R.id.mapFragment -> {
+                setFragment(TAG_MAP_FRAGMENT, MapFragment())
+                drawerLayout.closeDrawer(GravityCompat.START)
+                setActionBarTitle("악취지도")
             }
         }
         return false
@@ -154,25 +167,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Snackbar.make(binding.mainlayout,getString(R.string.backbtn), Snackbar.LENGTH_LONG).show()
         } else {
             finish() //액티비티 종료
-        }
-    }
-    private fun getHashKey(){
-        var packageInfo = PackageInfo()
-        try {
-            packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
-        } catch (e: PackageManager.NameNotFoundException){
-            e.printStackTrace()
-        }
-
-        for (signature: Signature in packageInfo.signatures){
-            try{
-                val md: MessageDigest = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                Log.e("KEY_HASH", Base64.encodeToString(md.digest(), Base64.DEFAULT))
-
-            } catch (e: NoSuchAlgorithmException){
-                Log.e("KEY_HASH", "Unable to get MessageDigest. signature = $signature", e)
-            }
         }
     }
 }

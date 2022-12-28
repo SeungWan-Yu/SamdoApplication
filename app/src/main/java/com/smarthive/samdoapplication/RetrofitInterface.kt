@@ -9,7 +9,9 @@ import retrofit2.http.*
 interface RetrofitInterface {
 
     @POST("/api/plasma/list")
-    fun getdevicelist():Call<DeviceModel>
+    fun getdevicelist(
+        @Body request: DeviceListRequest
+    ):Call<DeviceModel>
 
     @POST("/api/plasma/regist")
     fun registdevice(
@@ -27,7 +29,9 @@ interface RetrofitInterface {
     ): Call<Modifyrespon>
 
     @POST("/api/sensor/list")
-    fun getsensorlist():Call<SensorModel>
+    fun getsensorlist(
+        @Body request: DeviceListRequest
+    ):Call<SensorModel>
 
     @POST("/api/sensor/read")
     fun getsensor(
@@ -44,6 +48,19 @@ interface RetrofitInterface {
         @Body request: ControlSensor
     ):Call<Sensorrespon>
 
+    @POST("/user/join")
+    fun signup(
+        @Body request: SignupRequest
+    ):Call<SignupModel>
+
+    @POST("/user/loginAPP")
+    fun login(
+        @Body request: LoginRequest
+    ):Call<LoginpModel>
+
+    @POST("/api/sensor/map")
+    fun getMapPoint(
+    ):Call<MapPointModel>
 //    @POST("user/login")
 //    fun login(
 //        @Body request: LoginRequest

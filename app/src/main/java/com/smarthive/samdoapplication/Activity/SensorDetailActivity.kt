@@ -2,6 +2,7 @@ package com.smarthive.samdoapplication.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -22,7 +23,8 @@ class SensorDetailActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivitySensorDetailBinding
     var sensorname = ""
-    var port = 0
+    var port = ""
+    var idx = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +32,8 @@ class SensorDetailActivity : AppCompatActivity(){
 
         if (intent.hasExtra("sensorname")) {
             sensorname= intent.getStringExtra("sensorname").toString()
-            port= intent.getIntExtra("port",0)
+            port= intent.getStringExtra("port").toString()
+            idx= intent.getIntExtra("idx",0)
             this.supportActionBar?.title = sensorname
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
 //            Toast.makeText(applicationContext, "$port", Toast.LENGTH_SHORT).show()
@@ -197,7 +200,7 @@ class SensorDetailActivity : AppCompatActivity(){
         CoroutineScope(Dispatchers.Main).launch {
             val dialog = LoadingDialog(this@SensorDetailActivity)
             dialog.show()
-            App.retrofitService.getsensor(SensorRequest(sensorname)).enqueue(object : Callback<Sensorrespon>{
+            App.retrofitService.getsensor(SensorRequest(idx.toString())).enqueue(object : Callback<Sensorrespon>{
                 override fun onResponse(call: Call<Sensorrespon>, response: Response<Sensorrespon>) {
                     val body = response.body()
                     if (body != null){
@@ -209,7 +212,7 @@ class SensorDetailActivity : AppCompatActivity(){
                             binding.tvCH2O.setText("${data.CH2O} PPM")
                             binding.tvTEMP.setText("${data.TEMP} ℃")
                             binding.tvHUMI.setText("${data.HUMI} %")
-                            binding.tvVOCS.setText("${data.VOCS} PPM")
+                            binding.tvVOCS.setText("${String.format("%.3f",data.VOCS)} PPM")
                             binding.tvO3.setText("${String.format("%.3f",data.O3)} PPM")
                         }
                     }
@@ -219,6 +222,7 @@ class SensorDetailActivity : AppCompatActivity(){
                     dialog.dismiss()
                     finish()
                     Toast.makeText(applicationContext, "통신 실패", Toast.LENGTH_SHORT).show()
+                    Log.e("asdasd",t.message.toString())
                 }
             })
         }

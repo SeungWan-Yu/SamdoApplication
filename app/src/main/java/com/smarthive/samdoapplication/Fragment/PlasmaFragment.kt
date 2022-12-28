@@ -2,6 +2,7 @@ package com.smarthive.samdoapplication.Fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.smarthive.samdoapplication.adapter.DeviceListAdapter
 import com.smarthive.samdoapplication.databinding.FragmentPlasmaBinding
 import com.smarthive.samdoapplication.model.DeviceData
 import com.smarthive.samdoapplication.model.DeviceModel
+import com.smarthive.samdoapplication.request.DeviceListRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -82,7 +84,7 @@ class PlasmaFragment : Fragment() {
         CoroutineScope(Dispatchers.Main).launch {
             val dialog = LoadingDialog(requireContext())
             dialog.show()
-            App.retrofitService.getdevicelist().enqueue(object : Callback<DeviceModel> {
+            App.retrofitService.getdevicelist(DeviceListRequest(App.prefs.myId.toString())).enqueue(object : Callback<DeviceModel> {
                 override fun onResponse(call: Call<DeviceModel>, response: Response<DeviceModel>) {
                     val body = response.body()
                     if (body != null) {
@@ -95,6 +97,7 @@ class PlasmaFragment : Fragment() {
                 override fun onFailure(call: Call<DeviceModel>, t: Throwable) {
                     dialog.dismiss()
                     Toast.makeText(requireContext(), "통신 실패", Toast.LENGTH_SHORT).show()
+                    Log.e("asdasd",t.message.toString())
                 }
             })
         }
