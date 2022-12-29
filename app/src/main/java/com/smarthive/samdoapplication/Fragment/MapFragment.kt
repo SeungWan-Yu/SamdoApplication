@@ -77,6 +77,7 @@ class MapFragment : Fragment() {
     var checkfloatingPermission = 0
     private val ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 1
     lateinit var resultListner : ActivityResultLauncher<Intent>
+    var findindex = 0
 
 
 
@@ -206,25 +207,44 @@ class MapFragment : Fragment() {
                         mapView?.removeAllPOIItems()
                         mapdata = body.data
                         val uNowPosition = MapPoint.mapPointWithGeoCoord(mapdata!![0].GPS_LATITUDE.toDouble(), mapdata!![0].GPS_LONGITUDE.toDouble())
-                        zoomlevel = 6
+                        zoomlevel = 5
                         mapView?.setMapCenterPointAndZoomLevel(uNowPosition,zoomlevel, true)
 
                         for (i in mapdata!!.indices) {
-                            val marker1 = MapPOIItem()
-                            marker1.apply {
-                                itemName = mapdata!![i].SENSOR_IDX.toString()
-                                userObject = mapdata!![i].ADDR
-                                mapPoint = MapPoint.mapPointWithGeoCoord(
-                                    mapdata!![i].GPS_LATITUDE.toDouble(),
-                                    mapdata!![i].GPS_LONGITUDE.toDouble()
-                                )   // 좌표
-                                markerType = MapPOIItem.MarkerType.CustomImage
-                                customImageResourceId = R.drawable.marker
-                                selectedMarkerType = MapPOIItem.MarkerType.CustomImage
-                                customSelectedImageResourceId = R.drawable.clickmarker
-                                isCustomImageAutoscale = true
-                                marker.add(marker1)
+                            var red = 0
+                            var green = 0
+                            var blue = 0
+                            if (mapdata!![i].ODOR < 50){
+                                red = 0
+                                green = 255
+                                blue = 0
+                            }else if(mapdata!![i].ODOR <100){
+                                red = 255
+                                green = 0
+                                blue = 0
+                            }else{
+                                red = 127
+                                green = 0
+                                blue = 255
                             }
+                            val MARKER_POINT = MapPoint.mapPointWithGeoCoord(mapdata!![i].GPS_LATITUDE.toDouble(), mapdata!![i].GPS_LONGITUDE.toDouble())
+                            val cicle = MapCircle(MARKER_POINT, (mapdata!![i].ODOR)*10,0,Color.argb(70,red,green,blue))
+                            mapView?.addCircle(cicle)
+//                            val marker1 = MapPOIItem()
+//                            marker1.apply {
+//                                itemName = mapdata!![i].SENSOR_IDX.toString()
+//                                userObject = mapdata!![i].ADDR
+//                                mapPoint = MapPoint.mapPointWithGeoCoord(
+//                                    mapdata!![i].GPS_LATITUDE.toDouble(),
+//                                    mapdata!![i].GPS_LONGITUDE.toDouble()
+//                                )   // 좌표
+//                                markerType = MapPOIItem.MarkerType.CustomImage
+//                                customImageResourceId = R.drawable.marker
+//                                selectedMarkerType = MapPOIItem.MarkerType.CustomImage
+//                                customSelectedImageResourceId = R.drawable.clickmarker
+//                                isCustomImageAutoscale = true
+//                                marker.add(marker1)
+//                            }
                         }
                         setAdapter(marker)
                     }
@@ -288,7 +308,7 @@ class MapFragment : Fragment() {
         //마커 추가
         binding.addmarker.setOnClickListener {
 //            PermissionCheck(AddMarker)
-            getFarmMarker()
+            findOdor()
         }
         //현재위치
         binding.mylocation.setOnClickListener {
@@ -312,6 +332,17 @@ class MapFragment : Fragment() {
                 zoomlevel += 1
                 mapView?.setZoomLevel(zoomlevel, true)
             }
+        }
+    }
+
+    private fun findOdor() {
+        val uNowPosition = MapPoint.mapPointWithGeoCoord(mapdata!![findindex].GPS_LATITUDE.toDouble(), mapdata!![0].GPS_LONGITUDE.toDouble())
+        zoomlevel = 5
+        mapView?.setMapCenterPointAndZoomLevel(uNowPosition,zoomlevel, true)
+        if (findindex == mapdata!!.size -1){
+            findindex = 0
+        }else {
+            findindex += 1
         }
     }
 
@@ -439,7 +470,7 @@ class MapFragment : Fragment() {
                     mapView?.setMapCenterPointAndZoomLevel(uNowPosition, zoomlevel, true)
                     val mylocation = MapPOIItem()
                     mylocation.apply {
-                        itemName = ""
+                        itemName = "현재위치"
                         userObject = ""
                         mapPoint = MapPoint.mapPointWithGeoCoord(it.latitude, it.longitude)   // 좌표
                         markerType = MapPOIItem.MarkerType.CustomImage
@@ -637,7 +668,7 @@ class MapFragment : Fragment() {
 class MarkerEventListener(val context: Context): MapView.POIItemEventListener {
     override fun onPOIItemSelected(mapView: MapView?, poiItem: MapPOIItem?) {
         // 마커 클릭 시
-        slidePanel!!.panelHeight = 740
+//        slidePanel!!.panelHeight = 740
         for (i in mapdata!!.indices) {
             if (poiItem?.itemName == mapdata!![i].SENSOR_IDX.toString()){
                 addr!!.text = mapdata!![i].ADDR

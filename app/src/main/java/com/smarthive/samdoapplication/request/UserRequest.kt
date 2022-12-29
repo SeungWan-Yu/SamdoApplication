@@ -5,9 +5,9 @@ class UserRequest(
 }
 
 class SignupRequest(
-    val EMAIL: String,
-    val PASS : String,
-    val NAME : String
+    val USER_EMAIL: String,
+    val USER_PASS : String,
+    val USER_NAME : String
 ){
 }
 

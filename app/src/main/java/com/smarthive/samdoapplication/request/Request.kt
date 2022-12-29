@@ -15,6 +15,7 @@ class DeviceRequest(
 
 class RegistDeviceRequest(
     val PLSM_ID : String,
+    val USER_EMAIL : String,
     val PLSM_PORT : String,
     val PLSM_IP : String
 ){
@@ -34,11 +35,12 @@ class SensorRequest(
 
 class RegistSensorRequest(
     val SENSOR_ID : String,
-    val SENSOR_ADDR : String,
-    val ADDR_TYPE : String,
+    val USER_EMAIL : String,
     val SENSOR_PORT : String,
     val SENSOR_IP : String,
-    val SENSOR_MEMORY : String
+    val SENSOR_MEMORY : String,
+    val ADDR_TYPE : String,
+    val SENSOR_ADDR : String,
 ){
 }
 class RegistFarmRequest(

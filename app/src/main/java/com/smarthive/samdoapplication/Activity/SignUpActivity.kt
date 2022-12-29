@@ -14,7 +14,9 @@ import androidx.databinding.DataBindingUtil.setContentView
 import com.smarthive.samdoapplication.App
 import com.smarthive.samdoapplication.R
 import com.smarthive.samdoapplication.databinding.ActivitySignUpBinding
+import com.smarthive.samdoapplication.model.LoginpModel
 import com.smarthive.samdoapplication.model.SignupModel
+import com.smarthive.samdoapplication.request.DeviceListRequest
 import com.smarthive.samdoapplication.request.SignupRequest
 import retrofit2.Call
 import retrofit2.Callback
@@ -149,14 +151,14 @@ class SignUpActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 if (binding.passwordcheck.text.trim().toString() == binding.password.text.trim().toString()){
-                    binding.pwwtext.isVisible = true
-                    binding.pwwtext.setTextColor(Color.BLUE)
-                    binding.pwwtext.text = "비밀번호가 일치합니다"
+                    binding.pwwtext4.isVisible = true
+                    binding.pwwtext4.setTextColor(Color.BLUE)
+                    binding.pwwtext4.text = "비밀번호가 일치합니다"
 
 
                 }else{
-                    binding.pwwtext.isVisible = true
-                    binding.pwwtext.text = "비밀번호가 일치하지 않습니다"
+                    binding.pwwtext4.isVisible = true
+                    binding.pwwtext4.text = "비밀번호가 일치하지 않습니다"
                 }
             }
 
@@ -173,50 +175,49 @@ class SignUpActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 if (binding.password.text.trim().toString() == binding.passwordcheck.text.trim().toString()){
-                    binding.pwwtext.isVisible = true
-                    binding.pwwtext.setTextColor(Color.BLUE)
-                    binding.pwwtext.text = "비밀번호가 일치합니다"
+                    binding.pwwtext4.isVisible = true
+                    binding.pwwtext4.setTextColor(Color.BLUE)
+                    binding.pwwtext4.text = "비밀번호가 일치합니다"
                 }else{
-                    binding.pwwtext.isVisible = true
-                    binding.pwwtext.text = "비밀번호가 일치하지 않습니다"
+                    binding.pwwtext4.isVisible = true
+                    binding.pwwtext4.text = "비밀번호가 일치하지 않습니다"
                 }
             }
 
         })
 
-//        binding.idcheck.setOnClickListener {
-//            val id = binding.sid.text.trim().toString()
-//
-//            if(id == ""){
-//                Toast.makeText(this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
-//            }else{
-//                App.retrofitService.idCheck(IdCheckRequest(id)).enqueue(object : Callback<IdCheck>{
-//                    override fun onResponse(call: Call<IdCheck>, response: Response<IdCheck>) {
-//                        val body = response.body()
-//
-//                        when (body?.userCheck) {
-//                            "able" -> {
-//                                idCheck = 1
-//                                toast(getString(R.string.available_id))
-//                                sid.isEnabled = false
-//                            }
-//                            "notAble" -> {
-//                                idCheck = 1
-//                                toast(getString(R.string.in_use_id))
-//                            }
-//                            else -> {
-//                                toast(getString(R.string.error))
-//                            }
-//                        }
-//                    }
-//
-//                    override fun onFailure(call: Call<IdCheck>, t: Throwable) {
-//                        toast(getString(R.string.network))
-//                    }
-//
-//                })
-//            }
-//        }
+        binding.idcheck.setOnClickListener {
+            val id = binding.sid.text.trim().toString()
+
+            if(id == ""){
+                Toast.makeText(this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
+            }else{
+                App.retrofitService.idCheck(DeviceListRequest(id)).enqueue(object : Callback<LoginpModel>{
+                    override fun onResponse(call: Call<LoginpModel>, response: Response<LoginpModel>) {
+                        val body = response.body()
+
+                        when (body?.result) {
+                            true -> {
+                                idCheck = 1
+                                Toast.makeText(this@SignUpActivity, "사용 가능한 아이디 입니다", Toast.LENGTH_SHORT).show()
+                                binding.sid.isEnabled = false
+                            }
+                            false -> {
+                                Toast.makeText(this@SignUpActivity, "이미 사용중인 아이디 입니다", Toast.LENGTH_SHORT).show()
+                            }
+                            else -> {
+                                Toast.makeText(this@SignUpActivity, "에러", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<LoginpModel>, t: Throwable) {
+                        Toast.makeText(this@SignUpActivity, "네트워크 에러", Toast.LENGTH_SHORT).show()
+                    }
+
+                })
+            }
+        }
 
         binding.sucomplete.setOnClickListener {
             val id = binding.sid.text.trim().toString()
@@ -237,8 +238,8 @@ class SignUpActivity : AppCompatActivity() {
                 binding.pwwtext.text = "비밀번호가 일치하지 않습니다"
             }else if(idCheck == 0){
                 Toast.makeText(this, "아이디 중복 검사를 해주세요", Toast.LENGTH_SHORT).show()
-            }else if(certistate == 0) {
-                Toast.makeText(this, "인증을 확인 해주세요", Toast.LENGTH_SHORT).show()
+//            }else if(certistate == 0) {
+//                Toast.makeText(this, "인증을 확인 해주세요", Toast.LENGTH_SHORT).show()
             }else if (idisExist == false){
                 Toast.makeText(this, "올바른 이메일 형식을 입력하세요", Toast.LENGTH_SHORT).show()
 //            }else if(phone == ""){

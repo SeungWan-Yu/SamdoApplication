@@ -39,6 +39,7 @@ class PlasmaPopupActivity : AppCompatActivity() {
                 App.retrofitService.registdevice(
                     RegistDeviceRequest(
                         name.toString(),
+                        App.prefs.myId.toString(),
                         port.toString(),
                         ip.toString()
                     )

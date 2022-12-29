@@ -58,6 +58,11 @@ interface RetrofitInterface {
         @Body request: LoginRequest
     ):Call<LoginpModel>
 
+    @POST("/user/idCheck")
+    fun idCheck(
+        @Body request: DeviceListRequest
+    ):Call<LoginpModel>
+
     @POST("/api/sensor/map")
     fun getMapPoint(
     ):Call<MapPointModel>

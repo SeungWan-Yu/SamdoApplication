@@ -3,12 +3,12 @@
 
 
     <item
+        android:id="@+id/mapFragment"
+        android:title="악취지도" />
+    <item
         android:id="@+id/plasmaFragment"
         android:title="플라즈마" />
     <item
         android:id="@+id/sensorFragment"
         android:title="센서" />
-    <item
-        android:id="@+id/mapFragment"
-        android:title="악취지도" />
 </menu>

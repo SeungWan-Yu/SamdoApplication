@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         initNavigationMenu()
 
         // Default Fragment of MainActivity
-        setFragment(TAG_PLASMA_FRAGMENT, PlasmaFragment())
+        setFragment(TAG_MAP_FRAGMENT, MapFragment())
         setActionBarTitle("플라즈마")
     }
     /* Fragment State 유지 함수 */

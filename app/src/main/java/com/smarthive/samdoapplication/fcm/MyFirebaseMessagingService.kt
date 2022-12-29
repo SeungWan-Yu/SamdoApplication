@@ -10,6 +10,7 @@ import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.smarthive.samdoapplication.Activity.MainActivity
@@ -23,7 +24,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     lateinit var notificationManager: NotificationManager
     lateinit var notificationChannel: NotificationChannel
     lateinit var builder : Notification.Builder
-    private val channelId = "com.smarthive.samdoapplication.fragment"
+    private val channelId = "samdoapplication"
     private val description = "테스트 노티피케이션"
 
     // 파이어베이스 서비스의 토큰을 가져온다
@@ -34,11 +35,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     // 새로운 FCM 메시지가 있을 때 메세지를 받는다
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Log.d(TAG, "From: " + remoteMessage.from)
+        Log.d(TAG, "From: " + remoteMessage.data["content"])
 
         // 앱이 포어그라운드 상태에서 Notificiation을 받는 경우
         if(remoteMessage.notification != null) {
             sendNotification(remoteMessage.notification?.body, remoteMessage.notification?.title)
+        }else if (remoteMessage.data.isNotEmpty()){// 포어, 백그라운드 모두 Data를 받는 경우
+            sendNotification(remoteMessage.data["content"].toString(),remoteMessage.data["title"].toString())
         }
     }
 
@@ -76,6 +79,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setAutoCancel(true)
                 .setSound(notificationSound)
                 .setContentIntent(pendingIntent)
+                .setPriority(Notification.PRIORITY_HIGH)
         }
         notificationManager.notify(0,builder.build())
     }

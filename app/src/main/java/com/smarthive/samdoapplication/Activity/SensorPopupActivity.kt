@@ -63,11 +63,12 @@ class SensorPopupActivity : AppCompatActivity() {
                 App.retrofitService.registsensor(
                     RegistSensorRequest(
                         name.toString(),
-                        address.toString(),
-                        "ROAD",
+                        App.prefs.myId.toString(),
                         port.toString(),
                         ip.toString(),
-                        memory.toString()
+                        memory.toString(),
+                        "ROAD",
+                        address.toString()
                     )
                 ).enqueue(object :
                     Callback<Sensorrespon> {

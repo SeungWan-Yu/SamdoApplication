@@ -13,11 +13,12 @@
         android:id="@+id/nav_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로그아웃>"
+        android:layout_marginTop="46dp"
+        android:text="ID"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        android:textStyle="normal"
 
+        android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@id/nav_mypage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
@@ -29,15 +30,17 @@
         android:id="@+id/nav_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="로그아웃>"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        android:textStyle="normal"
 
+        android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@id/nav_mypage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nav_id" />
 
     <!-- 홈 아이콘 -->
 

@@ -120,7 +120,7 @@ class LoginActivity : AppCompatActivity() {
                 val md: MessageDigest = MessageDigest.getInstance("SHA")
                 md.update(signature.toByteArray())
                 val key = String(Base64.encode(md.digest(), 0))
-                binding.textView.text = key
+//                binding.textView.text = key
                 Log.e("KEY_HASH", Base64.encodeToString(md.digest(), Base64.DEFAULT))
 
             } catch (e: NoSuchAlgorithmException){
