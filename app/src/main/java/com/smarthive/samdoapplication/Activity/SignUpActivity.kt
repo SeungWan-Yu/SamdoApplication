@@ -240,7 +240,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "아이디 중복 검사를 해주세요", Toast.LENGTH_SHORT).show()
 //            }else if(certistate == 0) {
 //                Toast.makeText(this, "인증을 확인 해주세요", Toast.LENGTH_SHORT).show()
-            }else if (idisExist == false){
+            }else if (!idisExist){
                 Toast.makeText(this, "올바른 이메일 형식을 입력하세요", Toast.LENGTH_SHORT).show()
 //            }else if(phone == ""){
 //                Toast.makeText(this, "", Toast.LENGTH_SHORT).show()

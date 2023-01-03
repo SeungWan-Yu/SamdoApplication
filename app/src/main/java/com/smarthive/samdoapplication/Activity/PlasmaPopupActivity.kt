@@ -6,6 +6,7 @@ import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.google.android.material.snackbar.Snackbar
 import com.smarthive.samdoapplication.App
 import com.smarthive.samdoapplication.R
 import com.smarthive.samdoapplication.databinding.ActivityPopupPlasmaBinding
@@ -25,16 +26,19 @@ class PlasmaPopupActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_popup_plasma)
 
         binding.cancleButton.setOnClickListener {
-            setResult(4)
+            setResult(3)
             finish()
         }
         binding.successButton.setOnClickListener {
             val name = binding.plasmaName.text
             val port = binding.plasmaPort.text
             val ip = binding.plasmaIp.text
+            val ipcount = ip.count{it == '.'}
 
             if (name.toString() == "" || port.toString() == "" || ip.toString() == ""){
                 Toast.makeText(this, "정보를 입력 해주세요", Toast.LENGTH_SHORT).show()
+            }else if(ipcount != 3){
+                Toast.makeText(this, "올바른 IP를 입력해주세요", Toast.LENGTH_SHORT).show()
             }else {
                 App.retrofitService.registdevice(
                     RegistDeviceRequest(
@@ -66,6 +70,12 @@ class PlasmaPopupActivity : AppCompatActivity() {
                 })
             }
         }
+    }
+
+    override fun onBackPressed() {
+    // 뒤로가기 버튼 클릭
+        setResult(3)
+        finish()
     }
 
 

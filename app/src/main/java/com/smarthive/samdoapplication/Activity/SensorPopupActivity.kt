@@ -2,6 +2,7 @@ package com.smarthive.samdoapplication.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.Window
 import android.widget.Toast
@@ -46,19 +47,22 @@ class SensorPopupActivity : AppCompatActivity() {
             resultListner.launch(nIntent)
         }
         binding.cancleButton.setOnClickListener {
-            setResult(4)
+            setResult(3)
             finish()
         }
         binding.successButton.setOnClickListener {
             var name = binding.sensorName.text
             var port = binding.sensorPort.text
             var ip = binding.sensorIp.text
+            val ipcount = ip.count{it == '.'}
             var memory = binding.sensorMemory.text
             val address = binding.adress.text
 
             if (name.toString() == "" || port.toString() == "" || ip.toString() == ""
                 || memory.toString() == "" || address.toString() == ""){
                 Toast.makeText(this, "정보를 입력 해주세요", Toast.LENGTH_SHORT).show()
+            }else if(ipcount != 3){
+                Toast.makeText(this, "올바른 IP를 입력해주세요", Toast.LENGTH_SHORT).show()
             }else {
                 App.retrofitService.registsensor(
                     RegistSensorRequest(
@@ -77,8 +81,10 @@ class SensorPopupActivity : AppCompatActivity() {
                         response: Response<Sensorrespon>
                     ) {
                         val body = response.body()
+                        Log.e("asd",body?.result.toString())
                         if (body != null) {
-                            if (body.result == "true") {
+                            if (body.result) {
+                                Log.e("asd",body.data.toString())
                                 setResult(0)
                             } else {
                                 setResult(1)
@@ -96,6 +102,11 @@ class SensorPopupActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        // 뒤로가기 버튼 클릭
+        setResult(3)
+        finish()
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId

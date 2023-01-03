@@ -28,6 +28,11 @@ interface RetrofitInterface {
         @Body request: DeviceModify
     ): Call<Modifyrespon>
 
+    @POST("/api/plasma/del")
+    fun deleteplasma(
+        @Body request: DeviceRequest
+    ):Call<Devicedelete>
+
     @POST("/api/sensor/list")
     fun getsensorlist(
         @Body request: DeviceListRequest
@@ -46,7 +51,13 @@ interface RetrofitInterface {
     @POST("/api/sensor/controle")
     fun controlesensor(
         @Body request: ControlSensor
-    ):Call<Sensorrespon>
+    ):Call<SensorControlrespon>
+
+    @POST("/api/sensor/del")
+    fun deletesensor(
+        @Body request: SensorRequest
+    ):Call<Devicedelete>
+
 
     @POST("/user/join")
     fun signup(

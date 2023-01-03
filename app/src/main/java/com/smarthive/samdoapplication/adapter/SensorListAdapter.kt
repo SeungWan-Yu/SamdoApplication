@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.smarthive.samdoapplication.Fragment.addr
 import com.smarthive.samdoapplication.R
 import com.smarthive.samdoapplication.model.SensorData
 
@@ -18,7 +19,6 @@ class SensorListAdapter(val mContext:Context, val sensorList: List<SensorData>, 
 
     interface ItemClick{ //인터페이스
         fun onLongClick(view: View, position: Int)
-        fun onClick(view: View, position: Int)
     }
 
     var itemClick: ItemClick? = null
@@ -60,7 +60,7 @@ class SensorListAdapter(val mContext:Context, val sensorList: List<SensorData>, 
         val memory = itemView?.findViewById<TextView>(R.id.s_memory)
         val lati = itemView?.findViewById<TextView>(R.id.s_lati)
         val longi = itemView?.findViewById<TextView>(R.id.s_longi)
-        val addr = itemView?.findViewById<TextView>(R.id.s_addr)
+//        val addr = itemView?.findViewById<TextView>(R.id.s_addr)
         @SuppressLint("UseSwitchCompatOrMaterialCode", "SetTextI18n")
 
         fun bind(mContext: Context, sensor: SensorData, clickListener: (SensorData) -> Unit) {
@@ -96,11 +96,11 @@ class SensorListAdapter(val mContext:Context, val sensorList: List<SensorData>, 
                 }
             }
 
-            if (addr != null){
-                if (sensor != null) {
-                    addr.text = sensor.addr
-                }
-            }
+//            if (addr != null){
+//                if (sensor != null) {
+//                    addr.text = sensor.addr
+//                }
+//            }
            itemView.setOnClickListener {
                if (sensor != null) {
                    clickListener(sensor)

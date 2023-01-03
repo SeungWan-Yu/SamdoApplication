@@ -1,11 +1,13 @@
 package com.smarthive.samdoapplication.Fragment
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -21,13 +23,16 @@ import com.smarthive.samdoapplication.adapter.DeviceListAdapter
 import com.smarthive.samdoapplication.databinding.FragmentPlasmaBinding
 import com.smarthive.samdoapplication.model.DeviceData
 import com.smarthive.samdoapplication.model.DeviceModel
+import com.smarthive.samdoapplication.model.Devicedelete
 import com.smarthive.samdoapplication.request.DeviceListRequest
+import com.smarthive.samdoapplication.request.DeviceRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Response.error
 
 class PlasmaFragment : Fragment() {
 
@@ -49,6 +54,9 @@ class PlasmaFragment : Fragment() {
                 }
                 2 -> { // 실패 - 통신 오류
                     Toast.makeText(requireContext(), "통신 오류", Toast.LENGTH_SHORT).show()
+                }
+                3 -> { //취소
+                    Toast.makeText(requireContext(), "등록 취소", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -106,6 +114,42 @@ class PlasmaFragment : Fragment() {
     private fun setAdapter(devicelist: List<DeviceData>) {
         val deviceadapter = DeviceListAdapter(requireContext(),devicelist) {device ->
             comItemClicked(device)
+        }
+        deviceadapter.itemClick = object : DeviceListAdapter.ItemClick{
+            override fun onLongClick(view: View, position: Int) {
+                val mDialogView = LayoutInflater.from(context).inflate(R.layout.custom_dialog, null)
+                val mBuilder = AlertDialog.Builder(context)
+                    .setView(mDialogView)
+                    .setTitle("삭제")
+
+                mBuilder.setCancelable(false)
+                val mAlertDialog = mBuilder.show()
+                val okButton = mDialogView.findViewById<Button>(R.id.successButton)
+                okButton.setOnClickListener {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        App.retrofitService.deleteplasma(DeviceRequest(devicelist[position].devicename)).enqueue(object : Callback<Devicedelete> {
+                            override fun onResponse(call: Call<Devicedelete>, response: Response<Devicedelete>) {
+                                val body = response.body()
+
+                                if (body?.result == true && body.data == 1){
+                                    Toast.makeText(context, "삭제 되었습니다", Toast.LENGTH_SHORT).show()
+                                    getDevice()
+                                }else{
+                                    Toast.makeText(context, "삭제에 실패했습니다", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            override fun onFailure(call: Call<Devicedelete>, t: Throwable) {
+                                Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+                            }
+                        })
+                        mAlertDialog.dismiss()
+                    }
+                }
+                val noButton = mDialogView.findViewById<Button>(R.id.cancleButton)
+                noButton.setOnClickListener {
+                    mAlertDialog.dismiss()
+                }
+            }
         }
         binding.devicerecyclerView.adapter = deviceadapter
         binding.devicerecyclerView.layoutManager = LinearLayoutManager(requireContext())

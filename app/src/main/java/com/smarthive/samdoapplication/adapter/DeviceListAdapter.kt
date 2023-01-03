@@ -18,7 +18,6 @@ class DeviceListAdapter(val mContext:Context, val deviceList: List<DeviceData>, 
 
     interface ItemClick{ //인터페이스
         fun onLongClick(view: View, position: Int)
-        fun onClick(view: View, position: Int)
     }
 
     var itemClick: ItemClick? = null

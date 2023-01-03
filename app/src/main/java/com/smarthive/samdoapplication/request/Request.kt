@@ -52,7 +52,7 @@ class RegistFarmRequest(
 )
 
 class ControlSensor(
-    val SENSOR_ID : String,
+    val SENSOR_IDX : String,
     val TYPE : String,
     val DATA : Int
 )

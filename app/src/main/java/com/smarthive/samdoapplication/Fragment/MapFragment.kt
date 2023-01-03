@@ -171,9 +171,9 @@ class MapFragment : Fragment() {
 //            mapView?.setCalloutBalloonAdapter(CustomBalloonAdapter(layoutInflater))  // 커스텀 말풍선 등록
             mapView?.setPOIItemEventListener(eventListener)  // 마커 클릭 이벤트 리스너 등록
             mapView?.setMapViewEventListener(mapviewListener) // 맵뷰 이벤트 리스너 등록
-            val uNowPosition = MapPoint.mapPointWithGeoCoord(35.824092864990234, 127.14814758300781)
-            zoomlevel = 6
-            mapView?.setMapCenterPointAndZoomLevel(uNowPosition,zoomlevel, true)
+//            val uNowPosition = MapPoint.mapPointWithGeoCoord(35.824092864990234, 127.14814758300781)
+//            zoomlevel = 6
+//            mapView?.setMapCenterPointAndZoomLevel(uNowPosition,zoomlevel, true)
 //            mapView?.mapType = MapView.MapType.Hybrid
 //                Toast.makeText(activity,"현재 위치를 찾습니다.",Toast.LENGTH_SHORT).show()
 //            getMyLocation()
@@ -207,7 +207,7 @@ class MapFragment : Fragment() {
                         mapView?.removeAllPOIItems()
                         mapdata = body.data
                         val uNowPosition = MapPoint.mapPointWithGeoCoord(mapdata!![0].GPS_LATITUDE.toDouble(), mapdata!![0].GPS_LONGITUDE.toDouble())
-                        zoomlevel = 5
+                        zoomlevel = 3
                         mapView?.setMapCenterPointAndZoomLevel(uNowPosition,zoomlevel, true)
 
                         for (i in mapdata!!.indices) {
@@ -337,7 +337,7 @@ class MapFragment : Fragment() {
 
     private fun findOdor() {
         val uNowPosition = MapPoint.mapPointWithGeoCoord(mapdata!![findindex].GPS_LATITUDE.toDouble(), mapdata!![0].GPS_LONGITUDE.toDouble())
-        zoomlevel = 5
+        zoomlevel = 3
         mapView?.setMapCenterPointAndZoomLevel(uNowPosition,zoomlevel, true)
         if (findindex == mapdata!!.size -1){
             findindex = 0

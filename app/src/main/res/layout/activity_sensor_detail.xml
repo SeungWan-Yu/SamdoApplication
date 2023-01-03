@@ -15,62 +15,11 @@
         tools:context=".Activity.PlasmaDetailActivity">
 
         <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
-            android:weightSum="4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:text="PM2.5"
-                android:textColor="#656565" />
-
-            <TextView
-                android:id="@+id/tv_PM"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:text="H2S"
-                android:textColor="#656565" />
-
-            <TextView
-                android:id="@+id/tv_H2S"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:weightSum="4"
@@ -121,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:weightSum="4"
@@ -172,7 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:weightSum="4"
@@ -218,18 +167,281 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
+        <View
+
+            android:id="@+id/view"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#303030"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout20" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="풍향"
+                android:textColor="#656565" />
+
+            <TextView
+                android:id="@+id/tv_vec"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="풍속"
+                android:textColor="#656565" />
+
+            <TextView
+                android:id="@+id/tv_wsd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:textColor="#000000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
+
+            <TextView
+                android:id="@+id/tv_temper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="기온"
+                android:textColor="#656565" />
+
+            <TextView
+                android:id="@+id/tv_t1h"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/tv_humi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="습도"
+                android:textColor="#656565" />
+
+            <TextView
+                android:id="@+id/tv_reh"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:textColor="#000000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            android:weightSum="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_addr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="주소"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="시간"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="날씨"
+                android:textColor="#656565" />
+
+            <TextView
+                android:id="@+id/tv_pty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="강수량"
+                android:textColor="#656565" />
+
+            <TextView
+                android:id="@+id/tv_rn1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:textColor="#000000" />
+
+        </LinearLayout>
+
+        <View
+
+            android:id="@+id/view2"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#303030"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="PM2.5"
+                android:textColor="#656565" />
+
+            <TextView
+                android:id="@+id/tv_PM"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="H2S"
+                android:textColor="#656565" />
+
+            <TextView
+                android:id="@+id/tv_H2S"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="[플라즈마 장비 작동값 설정]"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
         <LinearLayout
             android:id="@+id/linearLayout6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:weightSum="10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+            app:layout_constraintTop_toBottomOf="@+id/textView18">
 
             <TextView
                 android:id="@+id/textView13"
@@ -275,7 +487,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             android:weightSum="10"

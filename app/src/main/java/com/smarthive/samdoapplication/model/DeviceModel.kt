@@ -19,10 +19,14 @@ class Registrespon(
     @SerializedName("data") val data: DeviceData
 )
 
-
 class Devicerespon(
     @SerializedName("result") val result : String,
     @SerializedName("data") val data : Deviceinfo
+)
+
+class Devicedelete(
+    @SerializedName("result") val result : Boolean,
+    @SerializedName("data") val data : Int
 )
 
 class Modifyrespon(
@@ -70,11 +74,15 @@ class SensorData(
     @SerializedName("CTL_PLSM") val plsm : Float,
 )
 
-class Sensorrespon(
-    @SerializedName("result") val result : String,
-    @SerializedName("data") val data : Sensorinfo
+class SensorControlrespon(
+    @SerializedName("result") val result : Boolean,
+    @SerializedName("data") val data : Boolean
 )
 
+class Sensorrespon(
+    @SerializedName("result") val result : Boolean,
+    @SerializedName("data") val data : Sensorinfo
+)
 
 class Sensorinfo(
     @SerializedName("PM25") val PM25 : Int,
@@ -85,8 +93,25 @@ class Sensorinfo(
     @SerializedName("HUMI") val HUMI : Float,
     @SerializedName("VOCS") val VOCS : Float,
     @SerializedName("O3") val O3 : Float,
-    @SerializedName("CTL_S2H") val CTL_H2S : Float,
-    @SerializedName("CTL_NH3") val CTL_NH3 : Float
+    @SerializedName("CTL_S2H") val CTL_H2S : Int,
+    @SerializedName("CTL_NH3") val CTL_NH3 : Int,
+    @SerializedName("WEATHER") val WEATHER : WeatherInfo
+)
+
+class WeatherInfo (
+    @SerializedName("IDX") val IDX : Int,
+    @SerializedName("ADDR") val ADDR :String,
+@SerializedName("X") val X : Int,
+@SerializedName("Y") val Y : Int,
+@SerializedName("PTY") val PTY : Int,
+@SerializedName("REH") val REH : Int,
+@SerializedName("RN1") val RN1 : Int,
+@SerializedName("T1H") val T1H : Double,
+@SerializedName("UUU") val UUU : Double,
+@SerializedName("VEC") val VEC : Int,
+@SerializedName("VVV") val VVV : Double,
+@SerializedName("WSD") val WSD : Double,
+@SerializedName("TMSP") val TMSP : String
 )
 
 class MapPointModel(

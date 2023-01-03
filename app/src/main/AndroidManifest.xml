@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:screenOrientation="portrait"
         tools:targetApi="31">
         <meta-data
             android:name="com.kakao.sdk.AppKey"
